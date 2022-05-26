@@ -6,7 +6,7 @@
 
 
 ### File structure
-> <font size="4.5"> the Python packages and simulation for bolasso and bsolar sparisty and accuracy comparison.
+> <font size="4.5"> the Python packages and simulation for bolasso and bsolar sparisty and accuracy comparison at Section 4 of the paper.
 
 * #### supporting functions
 

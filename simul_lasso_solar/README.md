@@ -6,7 +6,7 @@
 
 
 ### File structure
-> <font size="4.5"> the Python packages and simulation for lasso and solar
+> <font size="4.5"> the Python packages and simulation for lasso and solar at Section 4 of the paper
 
 * #### supporting functions
   - **./figures** : the folder of all detailed graphical results, saved as ".pdf";

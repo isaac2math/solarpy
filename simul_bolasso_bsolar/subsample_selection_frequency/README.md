@@ -6,7 +6,7 @@
 
 
 ### File structure
-> <font size="4.5"> the Python packages and simulation for bolasso and bsolar comparison on subsample selection efficiency.
+> <font size="4.5"> the Python packages and simulation for bolasso and bsolar comparison on subsample selection efficiency at Section 4 of the paper.
 
 * #### supporting functions
 
