@@ -63,7 +63,7 @@ class solar:
         # for convinience, we define the common variable (variables we need to use for each of the following functions) in the class as follows (the common variable is defined as self.xxxx)
 
         self.sample_size = X.shape[0]  # sample size
-        # the number of subsamples generated in solar (10 in paper)
+        # the number of subsamples generated in solar (3 in paper)
         self.n_repeat = n_repeat
         # (grid search) step size for tuning the value of c for solar
         self.step_size = step_size

@@ -59,7 +59,7 @@ class solar:
 
         # sample size
         self.sample_size = X.shape[0]
-        # the number of subsamples generated in solar (10 in paper)
+        # the number of subsamples generated in solar (3 in paper)
         self.n_repeat = n_repeat
         # (grid search) step size for tuning the value of c for solar
         self.step_size = -0.02
