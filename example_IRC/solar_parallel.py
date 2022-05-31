@@ -7,6 +7,9 @@ from sklearn.linear_model import Lars, LinearRegression, LassoLarsCV, LassoCV
 from costcom              import costs_com
 from sklearn.exceptions   import ConvergenceWarning
 from sklearn              import preprocessing
+from importlib.metadata   import version
+
+assert version('scikit-learn') <= '1.2.0', "Please make sure the scikit-learn version <= 1.2.0"
 
 warnings.filterwarnings("ignore", category=ConvergenceWarning, module="sklearn")
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -127,7 +130,7 @@ class solar:
             X_subsample = scaler.transform(X_subsample)
 
             # 2e(1). call the class 'Lars'
-            trial_1 = Lars(n_nonzero_coefs=min(X_subsample.shape[1] + 1, X_subsample.shape[0] + 1))
+            trial_1 = Lars(n_nonzero_coefs=min(X_subsample.shape[1] + 1, X_subsample.shape[0] + 1), normalize=False)
             # 2e(2). fit lars on the subsample
             trial_1.fit(X_subsample, y_subsample)
             # 2e(3). save the active set of lars (indices of variables select by lars) as 'active'.
@@ -154,9 +157,12 @@ class solar:
         # 3. if self.lasso == True, we compute CV-lars-lasso and CV-cd on the original sample X and Y (not on the subsample)
         if (self.lasso == True):
 
-            # a(1). call the class for CV-lars-lasso (called LassoLarsCV in Scikit-learn)
+            # a(1). call the class for CV-lars-lasso (called LassoLarsCV in Scikit-learn) and standardize X
+            scaler = preprocessing.StandardScaler().fit(self.X)
+            self.X = scaler.transform(self.X)
+
             # a(2). we set the number of folds in CV as 10
-            trial_2 = LassoLarsCV(cv=10)
+            trial_2 = LassoLarsCV(cv=10, normalize=False)
             # b. change y into one-dimensional array (required by Scikit-learn)
             yy = self.y
             yy.shape = (self.sample_size,)
@@ -171,7 +177,7 @@ class solar:
             # f. call the class for CV-cd (called LassoCV in Scikit-learn)
             # f(1). we set the number of folds in CV as 10
             # f(2). for reproduction, we fix the random seed of training-validation split in CV (random_state=0)
-            trial_3 = LassoCV(cv=10, random_state=0)
+            trial_3 = LassoCV(cv=10, random_state=0, normalize=False)
 
             # g.  fit cv-cd on X and Y
             trial_3.fit(self.X, yy)

@@ -5,6 +5,9 @@ import warnings
 from sklearn.linear_model import LassoCV, LinearRegression
 from sklearn.exceptions   import ConvergenceWarning
 from sklearn              import preprocessing
+from importlib.metadata   import version
+
+assert version('scikit-learn') <= '1.2.0', "Please make sure the scikit-learn version <= 1.2.0"
 
 warnings.filterwarnings("ignore", category=ConvergenceWarning, module="sklearn")
 warnings.filterwarnings("ignore", category=FutureWarning, module="sklearn")
@@ -88,7 +91,7 @@ class bolasso:
             X_subsample = scaler.transform(X_subsample)
             
             # 2e(1). call the built-in parallel lasso class and set the number of fold as 10
-            trial_1 = LassoCV(cv=10,n_jobs=-1)
+            trial_1 = LassoCV(cv=10, n_jobs=-1, normalize=False)
             # 2e(2). fit lasso on the subsample
             trial_1.fit(X_subsample, y_subsample)
             # 2e(3). save the lasso active set (indices of variables select by lassso) as 'active'.
@@ -191,9 +194,9 @@ if __name__ == '__main__':
 
     from simulator import simul
 
-    sample_size = 100
-    n_dim = 12
-    n_info = 5
+    sample_size = 50
+    n_dim = 5
+    n_info = 2
     n_repeat_bolasso = 256
 
     np.random.seed(2)

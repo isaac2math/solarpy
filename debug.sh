@@ -11,6 +11,10 @@ bug_check_py () {
 		echo
 
 		python $name
+		
+		echo
+		read -p "Press enter to continue"
+		echo
 	done
 
 }
