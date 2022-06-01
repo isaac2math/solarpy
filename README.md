@@ -8,7 +8,7 @@
 
 <br>
 
-### A detailed video walkthrough can be found at .
+### A detailed video walkthrough can be found at https://youtu.be/RKTAlto9pTg.
 
 <br>
 
