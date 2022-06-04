@@ -6,6 +6,9 @@ from sklearn.linear_model import Lars, LinearRegression, LassoLarsCV, LassoCV, l
 from costcom              import costs_com
 from sklearn.exceptions   import ConvergenceWarning
 from sklearn              import preprocessing
+from importlib.metadata   import version
+
+assert version('scikit-learn') <= '1.2.0', "Please make sure the scikit-learn version <= 1.2.0"
 
 warnings.filterwarnings("ignore", category=ConvergenceWarning, module="sklearn")
 warnings.filterwarnings("ignore", category=FutureWarning, module="sklearn")

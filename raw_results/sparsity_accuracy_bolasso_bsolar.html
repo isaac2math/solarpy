@@ -14579,7 +14579,36 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center><h1> bsolar vs bolasso </h1></center>
+<center><h1> sparsity and accuracy comparison : bsolar vs bolasso </h1></center>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<hr>
+<h2 id="Check-the-following-before-running-the-code">Check the following before running the code<a class="anchor-link" href="#Check-the-following-before-running-the-code">&#182;</a></h2><h3 id="(a)-Read-%22README.pdf%22-in-this-folder-first,-which-introduces-the-package">(a) Read "README.pdf" in this folder first, which introduces the package<a class="anchor-link" href="#(a)-Read-%22README.pdf%22-in-this-folder-first,-which-introduces-the-package">&#182;</a></h3><h3 id="(b)-Before-replication,-delete-all-.p-files-in-the-%22./numerical_result%22-folder.-The-.p-files-record-the-numerical-results-of-the-our-computation.">(b) Before replication, delete all .p files in the "./numerical_result" folder. The .p files record the numerical results of the our computation.<a class="anchor-link" href="#(b)-Before-replication,-delete-all-.p-files-in-the-%22./numerical_result%22-folder.-The-.p-files-record-the-numerical-results-of-the-our-computation.">&#182;</a></h3><h3 id="(c)-To-avoid-confusion,-reset-your-kernel-before-you-running-the-notebook-(to-clear-memory):">(c) To avoid confusion, reset your kernel before you running the notebook (to clear memory):<a class="anchor-link" href="#(c)-To-avoid-confusion,-reset-your-kernel-before-you-running-the-notebook-(to-clear-memory):">&#182;</a></h3><ul>
+<li><font size="4.5"> In Jupyter Notebook/Lab : go to Menu "Kernel" $\rightarrow$ "Restart Kernel and clear all outputs". </font> </li>
+</ul>
+<h3 id="(d)-To-evaluate-the-code-for-simulation-replication-In-Jupyter-Notebook/Lab,">(d) To evaluate the code for simulation replication In Jupyter Notebook/Lab,<a class="anchor-link" href="#(d)-To-evaluate-the-code-for-simulation-replication-In-Jupyter-Notebook/Lab,">&#182;</a></h3><ul>
+<li><font size="4.5"> click : Menu "Kernel" $\rightarrow$ "Restart Kernel and Run All Cells" </font></li>
+<li><font size="4.5"> or, select a cell of code, press "shift" and "enter". Run all cells to avoid errors </font></li>
+</ul>
+<h3 id="(e)-Check-%22joblib%22,-%22scikit-learn%22,-%22numpy%22,-%22matplotlib%22-and-%22tqdm%22-are-installed.-If-not,">(e) Check "joblib", "scikit-learn", "numpy", "matplotlib" and "tqdm" are installed. If not,<a class="anchor-link" href="#(e)-Check-%22joblib%22,-%22scikit-learn%22,-%22numpy%22,-%22matplotlib%22-and-%22tqdm%22-are-installed.-If-not,">&#182;</a></h3><ul>
+<li><font size="4.5"> we highly recommend installing Anaconda3 version 2020-11 directly to avoid package management (all packages mentioned above are installed by default).</font></li>
+</ul>
+<h3 id="(d)-Read-this-before-you-move-on-:-the-runtime-length-issue-of-bolasso">(d) <strong>Read this before you move on</strong> : the runtime length issue of bolasso<a class="anchor-link" href="#(d)-Read-this-before-you-move-on-:-the-runtime-length-issue-of-bolasso">&#182;</a></h3><ul>
+<li><p><font size="4.5"> Beware that bolasso computation could take very long time. On a Thinkpad T480 laptop with i5-8500u CPU and 8G Ram, bolasso takes around 20-30 mins for one repetition at $p/n=1200/600$ (60 hours for 200 repetitions in total). </font></p>
+</li>
+<li><p><font size="4.5"> Please use a CPU with 8 or more cores if you want to replicate the bolasso result as quick as possible </font></p>
+</li>
+</ul>
+<hr>
+
 </div>
 </div>
 </div>
@@ -14600,7 +14629,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14618,11 +14647,66 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="kn">import</span> <span class="nn">pickle</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">errno</span>
+
+<span class="kn">import</span> <span class="nn">mkl</span>
+
+<span class="n">mkl</span><span class="o">.</span><span class="n">get_version_string</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This was obtained using the following MKL configuration:&#39;</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">show_config</span><span class="p">()</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>This was obtained using the following MKL configuration:
+blas_mkl_info:
+    libraries = [&#39;mkl_rt&#39;, &#39;pthread&#39;]
+    library_dirs = [&#39;/home/ning/anaconda3/lib&#39;]
+    define_macros = [(&#39;SCIPY_MKL_H&#39;, None), (&#39;HAVE_CBLAS&#39;, None)]
+    include_dirs = [&#39;/home/ning/anaconda3/include&#39;]
+blas_opt_info:
+    libraries = [&#39;mkl_rt&#39;, &#39;pthread&#39;]
+    library_dirs = [&#39;/home/ning/anaconda3/lib&#39;]
+    define_macros = [(&#39;SCIPY_MKL_H&#39;, None), (&#39;HAVE_CBLAS&#39;, None)]
+    include_dirs = [&#39;/home/ning/anaconda3/include&#39;]
+lapack_mkl_info:
+    libraries = [&#39;mkl_rt&#39;, &#39;pthread&#39;]
+    library_dirs = [&#39;/home/ning/anaconda3/lib&#39;]
+    define_macros = [(&#39;SCIPY_MKL_H&#39;, None), (&#39;HAVE_CBLAS&#39;, None)]
+    include_dirs = [&#39;/home/ning/anaconda3/include&#39;]
+lapack_opt_info:
+    libraries = [&#39;mkl_rt&#39;, &#39;pthread&#39;]
+    library_dirs = [&#39;/home/ning/anaconda3/lib&#39;]
+    define_macros = [(&#39;SCIPY_MKL_H&#39;, None), (&#39;HAVE_CBLAS&#39;, None)]
+    include_dirs = [&#39;/home/ning/anaconda3/include&#39;]
+Supported SIMD extensions in this NumPy install:
+    baseline = SSE,SSE2,SSE3
+    found = SSSE3,SSE41,POPCNT,SSE42,AVX,F16C,FMA3,AVX2
+    not found = AVX512F,AVX512CD,AVX512_KNL,AVX512_KNM,AVX512_SKX,AVX512_CNL
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14950,7 +15034,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr>
-<h2 id="Read-this-before-you-move-on-:-the-runtime-length-issue-of-bolasso"><strong>Read this before you move on</strong> : the runtime length issue of bolasso<a class="anchor-link" href="#Read-this-before-you-move-on-:-the-runtime-length-issue-of-bolasso">&#182;</a></h2><h3 id="Beware-that-bolasso-computation-could-take-very-long-time.-On-a-Thinkpad-T480-laptop-with-i5-8500u-CPU-and-8G-Ram,-bolasso-takes-around-60-mins-for-one-repetition-at-$p/n=1200/600$-(200-hours-for-200-repetitions-in-total).">Beware that bolasso computation could take very long time. On a Thinkpad T480 laptop with i5-8500u CPU and 8G Ram, bolasso takes around 60 mins for one repetition at $p/n=1200/600$ (200 hours for 200 repetitions in total).<a class="anchor-link" href="#Beware-that-bolasso-computation-could-take-very-long-time.-On-a-Thinkpad-T480-laptop-with-i5-8500u-CPU-and-8G-Ram,-bolasso-takes-around-60-mins-for-one-repetition-at-$p/n=1200/600$-(200-hours-for-200-repetitions-in-total).">&#182;</a></h3><h3 id="Please-use-a-proper-desktop-with-a-8-core-CPU-if-you-want-to-replicate-the-bolasso-result-as-quick-as-possible">Please use a proper desktop with a 8-core CPU if you want to replicate the bolasso result as quick as possible<a class="anchor-link" href="#Please-use-a-proper-desktop-with-a-8-core-CPU-if-you-want-to-replicate-the-bolasso-result-as-quick-as-possible">&#182;</a></h3><hr>
+<h2 id="Read-this-before-you-move-on-:-the-runtime-length-issue-of-bolasso"><strong>Read this before you move on</strong> : the runtime length issue of bolasso<a class="anchor-link" href="#Read-this-before-you-move-on-:-the-runtime-length-issue-of-bolasso">&#182;</a></h2><h3 id="Beware-that-bolasso-computation-could-take-very-long-time.-On-a-Thinkpad-T480-laptop-with-i5-8500u-CPU-and-8G-Ram,-bolasso-takes-around-20-30-mins-for-one-repetition-at-$p/n=1200/600$-(60-hours-for-200-repetitions-in-total">Beware that bolasso computation could take very long time. On a Thinkpad T480 laptop with i5-8500u CPU and 8G Ram, bolasso takes around 20-30 mins for one repetition at $p/n=1200/600$ (60 hours for 200 repetitions in total<a class="anchor-link" href="#Beware-that-bolasso-computation-could-take-very-long-time.-On-a-Thinkpad-T480-laptop-with-i5-8500u-CPU-and-8G-Ram,-bolasso-takes-around-20-30-mins-for-one-repetition-at-$p/n=1200/600$-(60-hours-for-200-repetitions-in-total">&#182;</a></h3><h3 id="Please-use-a-proper-desktop-with-a-8-core-CPU-if-you-want-to-replicate-the-bolasso-result-as-quick-as-possible">Please use a proper desktop with a 8-core CPU if you want to replicate the bolasso result as quick as possible<a class="anchor-link" href="#Please-use-a-proper-desktop-with-a-8-core-CPU-if-you-want-to-replicate-the-bolasso-result-as-quick-as-possible">&#182;</a></h3><hr>
 
 </div>
 </div>
