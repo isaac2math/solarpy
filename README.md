@@ -4,14 +4,6 @@
 
 <br>
 
-### The corresponding paper can be found at https://arxiv.org/abs/2007.15707.
-
-<br>
-
-### A detailed video walkthrough can be found at https://youtu.be/RKTAlto9pTg.
-
-<br>
-
 ### #0. This Github repository includes
 > <font size="4"> the detailed explanations and comments of each file can be found in the README file or "READEME.pdf" in each folder.
 
